@@ -71,6 +71,7 @@
     </div>
     <script src='/jquery.js'></script>
     <script>
+        'use strict'
         $.ajax({
             url: "/found",
             type: "get",
@@ -88,9 +89,8 @@
                 $('.list').append($(str))
             })
         }
-        $('.list').on('click', 'li', () => {
+        $('.list').on('click', 'li', function() {
             let id = $(this).attr('data-id');
-            console.log(id)
             window.location.href = '/content?id=' + id;
         })
         $('.add').on('click', () => {
