@@ -8,9 +8,11 @@ router.post('/select', (req, res) => {
     let id = req.body.id,
         sql = "select * from newTitle where id=" + id;
     connection.query(sql, (err, result) => {
+
         if (err) throw err;
         if (result.length > 0) {
-            return res.send(result)
+
+            res.send(result)
         }
     })
 })

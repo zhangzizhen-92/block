@@ -6,9 +6,10 @@ const express = require('express'),
     router = express.Router();
 router.post('/some', (req, res) => {
     let title = req.body.title,
-        time = req.body.time,
+
         content = req.body.content,
-        sql = "insert into newTitle(title,time,content) values('" + title + "','" + time + "','" + content + "')";
+
+        sql = "insert into newTitle(title,content) values('" + title + "','" + content + "')";
     console.log(sql)
     connection.query(sql, (err, result) => {
         if (err) throw err;

@@ -50,10 +50,6 @@
             <p>标题：</p>
             <div class="box" id="title" contenteditable="true"></div>
         </div>
-        <div class="rox time">
-            <p>时间：</p>
-            <div class="box" id="time" contenteditable="true"></div>
-        </div>
         <div class="rox cont">
             <p>内容：</p>
             <div class="box" id="cont" contenteditable="true"></div>
@@ -66,15 +62,14 @@
     <script>
         'use strict'
         $('.add').on('click', function() {
-            const time = $('#time').text(),
-                title = $('#title').text(),
+
+            const title = $('#title').text(),
                 cont = $('#cont').text();
             $.ajax({
                 url: '/some',
                 type: 'post',
                 data: {
                     title: title,
-                    time: time,
                     content: cont
                 },
                 success: function(msg) {
