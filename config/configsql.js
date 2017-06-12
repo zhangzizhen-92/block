@@ -9,4 +9,5 @@ let connection = mysql.createConnection({
     database: "zzzdata"
 })
 connection.connect();
+
 module.exports = connection;

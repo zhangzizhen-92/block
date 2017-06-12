@@ -11,7 +11,7 @@ const index = require("../router/index.js"),
 
 module.exports = (app) => {
     app.get('/index', index);
-    app.get('/found', found);
+    app.post('/found', found);
 
     app.get('/content', content);
     app.post('/select', select);

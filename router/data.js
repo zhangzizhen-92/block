@@ -9,7 +9,7 @@ router.post('/some', (req, res) => {
 
         content = req.body.content,
 
-        sql = "insert into newTitle(title,content) values('" + title + "','" + content + "')";
+        sql = "insert into newTitle(title,time,content) values('" + title + "',now(),'" + content + "')";
     console.log(sql)
     connection.query(sql, (err, result) => {
         if (err) throw err;

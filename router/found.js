@@ -3,10 +3,11 @@
  */
 const express = require('express'),
     router = express.Router(),
-    connection = require("../config/configsql.js");
-router.get('/found', (req, res) => {
 
-    connection.query("select * from newTitle", (err, result) =>
+    connection = require("../config/configsql.js");
+router.post('/found', (req, res) => {
+
+    connection.query("select * from newTitle limit " + req.body.start + ",5", (err, result) =>
         res.send(result)
     )
 })

@@ -12,6 +12,10 @@
             padding: 0;
         }
         
+        li {
+            list-style: none;
+        }
+        
         .header {
             height: 50px;
             background-color: #f4f4f4;
@@ -46,6 +50,7 @@
         }
         
         .add {
+            clear: both;
             margin: 20px auto;
             width: 70%;
             height: 50px;
@@ -53,6 +58,23 @@
             line-height: 50px;
             background-color: dodgerblue;
             color: #fff;
+        }
+        
+        .btn {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            float: right;
+            height: 30px;
+        }
+        
+        .btn li {
+            float: left;
+            margin-right: 6px;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 30px;
         }
     </style>
 </head>
@@ -65,6 +87,14 @@
         <ul class="list">
 
         </ul>
+        <ul class="btn">
+            <%for(var i=0,num=Math.ceil(len/5);i<num;i++){%>
+                <li data-ind=<%=i%>>
+                    <%=(i+1)%>
+                </li>
+                <%}%>
+
+        </ul>
         <div class="add">
             添加
         </div>
@@ -72,26 +102,47 @@
     <script src='/jquery.js'></script>
     <script>
         'use strict'
-        $.ajax({
-            url: "/found",
-            type: "get",
-            success: function(msg) {
 
-                rander(msg)
-            }
+        ajax();
 
-        })
+        function ajax(n) {
+            $.ajax({
+                url: "/found",
+                type: "post",
+                data: {
+                    start: n || 0
+                },
+                success: function(msg) {
+
+                    rander(msg)
+                }
+
+            })
+        }
 
         function rander(data) {
+            $('.list').html('');
             data.forEach(function(i) {
                 console.log(i.title)
                 let str = '<li data-id=' + i.id + '>' + i.title + '<span class="times">' + i.time + '</span></li>';
                 $('.list').append($(str))
-            })
+            });
+
         }
         $('.list').on('click', 'li', function() {
             let id = $(this).attr('data-id');
             window.location.href = '/content?id=' + id;
+        })
+        $('.btn').on('click', 'li', function() {
+            let inds = $(this).attr('data-ind');
+            let colun = inds * 5 - 1;
+            console.log(inds)
+            if (inds == 0) {
+                ajax()
+            } else {
+                ajax(colun)
+            }
+
         })
         $('.add').on('click', () => {
             window.location.href = '/add'
