@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%=title%></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper{
+            width: 700px;
+            margin: auto;
+        }
+        .rox{
+            margin-top: 20px;
+        }
+        .row p{
+            padding-left: 10px;
+            line-height: 30px;
+        }
+        .box{
+            margin-top: 10px;
+            min-height: 100px;
+            border: 1px solid #ccc;
+        }
+        .add{
+            margin: 20px auto;
+            width: 70%;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: dodgerblue;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="rox title">
+            <p>标题：</p>
+            <div class="box" id="title" contenteditable="true"></div>
+        </div>
+        <div class="rox time">
+            <p>时间：</p>
+            <div class="box" id="time" contenteditable="true"></div>
+        </div>
+        <div class="rox cont">
+            <p>内容：</p>
+            <div class="box" id="cont" contenteditable="true"></div>
+        </div>
+        <div class="add">
+            添加
+        </div>
+    </div>
+    <script src='/jquery.js'></script>
+    <script>
+
+        $('.add').on('click',function(){
+            const time = $('#time').text(),
+                title = $('#title').text(),
+                cont = $('#cont').text();
+            $.ajax({
+                url: '/some',
+                type: 'post',
+                data:{
+                    title: title,
+                    time: time,
+                    content: cont
+                },
+                success: function(msg){
+                    window.location.href = '/index';
+                    console.log(msg)
+                }
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%=title%>
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            height: 50px;
+            background-color: #f4f4f4;
+            line-height: 50px;
+            color: #333;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .wrapper {
+            width: 700px;
+            margin: auto;
+        }
+        
+        .list {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .list li {
+            position: relative;
+            list-style: none;
+            line-height: 40px;
+            font-size: 16px;
+        }
+        
+        .times {
+            position: absolute;
+            right: 0;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .add {
+            margin: 20px auto;
+            width: 70%;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: dodgerblue;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            个人新闻
+        </div>
+        <ul class="list">
+
+        </ul>
+        <div class="add">
+            添加
+        </div>
+    </div>
+    <script src='/jquery.js'></script>
+    <script>
+        $.ajax({
+            url: "/found",
+            type: "get",
+            success: function(msg) {
+
+                rander(msg)
+            }
+
+        })
+
+        function rander(data) {
+            data.forEach(function(i) {
+                console.log(i.title)
+                let str = '<li data-id=' + i.id + '>' + i.title + '<span class="times">' + i.time + '</span></li>';
+                $('.list').append($(str))
+            })
+        }
+        $('.list').on('click', 'li', () => {
+            let id = $(this).attr('data-id');
+            console.log(id)
+            window.location.href = '/content?id=' + id;
+        })
+        $('.add').on('click', () => {
+            window.location.href = '/add'
+        })
+    </script>
+
+</body>
+
+</html>
